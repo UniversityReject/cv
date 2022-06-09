@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="130.747" height="130.747" viewBox="0 0 130.747 130.747">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #00a1ed;
+        stroke-miterlimit: 10;
+        stroke-width: 2px;
+      }
+
+      .cls-2 {
+        filter: url(#Rectangle_22);
+      }
+
+      .cls-3 {
+        filter: url(#Path_1);
+      }
+    </style>
+    <filter id="Path_1" x="24.048" y="15.104" width="82.33" height="109.643" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.349"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Rectangle_22" x="0" y="0" width="130.747" height="130.747" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_62" data-name="Group 62" transform="translate(-237.412 -72.187)">
+    <g class="cls-3" transform="matrix(1, 0, 0, 1, 237.41, 72.19)">
+      <path id="Path_1-2" data-name="Path 1" d="M64.423-134.971c-2.332-2.535-8.618-4.968-10.747.3C48.2-121.182,45.666-108.2,42.523-94.112c-7.2,0-10.544.2-13.89.1.811-10.443,4.968-25.347,5.982-32.444.507-3.346-6.894-3.244-8.516-3.244s-2.737.406-3.244,2.028c-2.839,13.282-5.779,24.029-7.4,33.559-3.853.3-7.5-.2-11.153,0-6.489,0-3.954,4.055-2.332,6.185,3.549,5.678,8.415,12.876,8.415,19.77,0,.912-.2,1.825-.2,2.839,0,3.042,5.475,4.968,9.429,4.968,4.157,0,3.853-1.825,4.157-4.157,1.318-11.862,2.737-18.452,3.751-24.84,6.286-.3,10.139.1,13.991,0-1.724,9.023-5.272,27.881-6.083,38.02-.3,3.954,3.346,5.171,6.185,5.171s3.853-.608,4.055-2.839c1.115-11.254,2.839-22.508,6.185-40.048.2-1.014,1.926-.507,1.926-1.825a3.038,3.038,0,0,0-1.217-1.926C55.6-106.785,59.252-121.182,64.423-134.971ZM14.338-89.55c-.3,1.318-.608,2.636-.811,3.954-1.014-1.318-1.926-2.636-2.839-3.954Z" transform="translate(32.96 158.9)"/>
+    </g>
+    <g class="cls-2" transform="matrix(1, 0, 0, 1, 237.41, 72.19)">
+      <rect id="Rectangle_22-2" data-name="Rectangle 22" class="cls-1" width="110.747" height="110.747" transform="translate(10 7)"/>
+    </g>
+  </g>
+</svg>

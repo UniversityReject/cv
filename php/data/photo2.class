@@ -1,0 +1,141 @@
+<?php
+error_reporting( E_ALL );
+ini_set( 'display_errors', 1 );
+include_once( "DB_PDO.Class.php" );
+class PhotoData {
+	// property declaration
+	private $dbh;
+
+	public
+	function __construct() {
+		$link = new myPDO(); // link to mySQL Database
+		$this->dbh = $link->dbh();
+	}
+
+	// CRUD method declarations: create, read, update and delete
+
+	// CREATE
+	// addPhoto: add new photo record
+	public
+	function addPhoto( $newname, $newdescription, $newfilename ) {
+		// sql commands
+		$sql = "INSERT INTO `myphoto` (`title`,`description`, `imageRef`)
+		VALUES (:title, :description, :imageRef);";
+
+		$statement = $this->dbh->prepare( $sql );
+
+		$statement->bindParam(':title', $newname, PDO::PARAM_STR);
+		$statement->bindParam(':description', $newdescription, PDO::PARAM_STR);
+		$statement->bindParam(':imageRef', $newfilename, PDO::PARAM_STR);
+
+		if ( $statement->execute( ) ) {
+			$last_id = $this->dbh->lastInsertId();
+		} else {
+			$last_id = -1; // error
+		}
+
+		return $last_id;
+	}
+
+
+	// READ
+	// complete listing of photos
+	public
+	function getListing() {
+		$sql = "SELECT `title`, `description` FROM `myphoto`;";
+
+		$statement = $this->dbh->prepare( $sql );
+		$rec = [];
+
+		if ( $statement->execute() ) {
+			$found = $statement->fetchAll( PDO::FETCH_ASSOC );
+		} else {
+			$found = []; // empty
+		}
+
+		return $found;
+	}
+
+	// find photo records where title or description contain the $searchString
+	public
+	function searchPhotos( $searchString ) {
+		$sql = "SELECT `id`, `title`, `imageRef`, description FROM `myphoto` 
+		WHERE `title` LIKE :search 
+		ORDER BY title ASC;";
+
+		$statement = $this->dbh->prepare( $sql );
+
+		$searchString = '%' . $searchString . '%';
+		$statement->bindParam(':search', $searchString, PDO::PARAM_STR);
+							  
+		if ( $statement->execute(  ) ) {
+			$found = $statement->fetchAll( PDO::FETCH_ASSOC );
+		} else {
+			$found = []; // empty
+		}
+
+		return $found;
+	}
+
+	// return a single record for $recID
+	public
+	function getPhotoRecord( $recID ) {
+		$sql = "SELECT `id`, `title`, `imageRef`, description FROM `myphoto` 
+		WHERE `id` = :id;";
+
+		$statement = $this->dbh->prepare( $sql );
+		$statement->bindParam(':id', $recID, PDO::PARAM_INT);
+
+		if ( $statement->execute(  ) ) {
+			// use fetch instead of fetchAll for single record
+			$found = $statement->fetch( PDO::FETCH_ASSOC );
+		} else {
+			$found = []; // empty
+		}
+		return $found;
+	}
+
+	// UPDATE
+	// updatePhoto: update photo record $recID
+	// return photoID
+	public
+	function updatePhoto( $recID, $title, $description, $filename, $album = 0, $uid = 0 ) {
+	// sql commands
+		if (empty($filename)) { // if not file uploaded, don't update imageRef
+			$sql = "UPDATE `myphoto` SET `title`=:title,
+			`description`=:description
+			WHERE id=:id;";
+		} else {
+			$sql = "UPDATE `myphoto` SET `title`=:title,
+			`description`=:description, `imageRef`=:filename
+			WHERE id=:id;";
+		}
+
+		$statement = $this->dbh->prepare( $sql );
+
+		$statement->bindParam(':id', $recID, PDO::PARAM_INT);
+		$statement->bindParam(':title', $title, PDO::PARAM_STR);
+		$statement->bindParam(':description', $description, PDO::PARAM_STR);
+		
+		if (!empty($filename)) { // bindParam if $filename is not empty
+			$statement->bindParam(':filename', $filename, PDO::PARAM_STR);
+		}
+
+		if ( $statement->execute( ) ) {
+			$row_updated = $statement->rowCount(); //row affected
+		} else {
+			$row_updated = -1; // error
+		}
+
+		return $row_updated;
+	}
+
+	// Update filename of photo
+	public
+	function updatePhotoFilename( $recID, $newFilename ) {
+		return $err;
+	}
+
+	// DELETE : We don't ===> Danger!!
+}
+?>
